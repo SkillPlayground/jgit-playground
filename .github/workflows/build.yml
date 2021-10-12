@@ -11,6 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: Set up Java
@@ -31,19 +32,15 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: AddChangelogItem task
-        run: ./gradlew addChangelogItem --renovateCommitTable
-
-      - name: Git diff
-        run: git diff
-
-      - uses: EndBug/add-and-commit@v7.4.0
-        with:
-          default_author: user_info
-          author_name: 'Javier Segovia Córdoba'
-          author_email: 'javier@segoviacordoba.com'
-          committer_name: 'Javier Segovia Córdoba'
-          committer_email: 'javier@segoviacordoba.com'
-          message: 'Add updated dependencies to `CHANGELOG.md`'
+        run: |
+          git switch -c ${{ github.event.pull_request.head.ref }}
+          ./gradlew addChangelogItem --renovateCommitTable
+          git config --global user.email "javier@segoviacordoba.com"
+          git config --global user.name "Javier Segovia Córdoba"
+          git diff
+          git commit --amend --no-edit
+          git diff
+          git push --set-upstream origin try-jgit --force
 
       - name: Stop Gradle daemons
         run: ./gradlew --stop
