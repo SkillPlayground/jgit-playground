@@ -1,0 +1,6 @@
+[versions]
+
+kotlin = "1.5.31"
+
+[libraries]
+jetbrains-kotlin-kotlinGradlePluginX = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
