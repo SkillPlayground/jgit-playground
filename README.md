@@ -1,1 +1,1 @@
-# JGit playground
+# JGit Playground
