@@ -2,10 +2,6 @@ name: build
 
 on:
   push:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
 
 jobs:
   build:
@@ -36,6 +32,13 @@ jobs:
 
       - name: JGit task
         run: ./gradlew jgit
+
+      - name: JGit task
+        run: ./gradlew addChangelogItem --renovateCommitTable
+
+
+      - name: Git diff
+        run: git diff
 
       - name: Stop Gradle daemons
         run: ./gradlew --stop

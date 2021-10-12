@@ -6,6 +6,7 @@ repositories {
     mavenCentral()
     google()
     gradlePluginPortal()
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
@@ -18,4 +19,5 @@ dependencies {
     implementation(files(pluginLibs.javaClass.superclass.protectionDomain.codeSource.location))
 
     implementation(libs.eclipse.jgit)
+    implementation(pluginLibs.javiersc.gradlePlugins.changelog)
 }
