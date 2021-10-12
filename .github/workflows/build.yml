@@ -31,19 +31,22 @@ jobs:
             gradle-${{ runner.os }}-
 
       - name: AddChangelogItem task
-        run: ./gradlew addChangelogItem --renovateCommitTable
+        run: |
+          git config --local user.email "javier@segoviacordoba.com"
+          git config --local user.name "Javier Segovia Córdoba"
+          git reset --soft HEAD~1
+          ./gradlew addChangelogItem --renovateCommitTable
+          git commit --amend --no-edit
 
-      - name: Git diff
-        run: git diff
+      - name: Generate Tag
+        run: ./gradlew reckonTagCreate -P"reckon.scope"="${{ github.event.inputs.scope }}" -P"reckon.stage"="${{ github.event.inputs.stage }}"
 
-      - uses: EndBug/add-and-commit@v7.4.0
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          default_author: user_info
-          author_name: 'Javier Segovia Córdoba'
-          author_email: 'javier@segoviacordoba.com'
-          committer_name: 'Javier Segovia Córdoba'
-          committer_email: 'javier@segoviacordoba.com'
-          message: 'Add updated dependencies to `CHANGELOG.md`'
+          branch: 'main'
+          tags: true
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: Stop Gradle daemons
         run: ./gradlew --stop

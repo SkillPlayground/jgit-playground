@@ -1,5 +1,5 @@
 [versions]
-javierscGradlePlugins = "0.1.0-alpha.65"
+javierscGradlePlugins = "0.1.0-alpha.66"
 kotlin = "1.5.31"
 
 [libraries]
