@@ -41,7 +41,6 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           branch: '${{ github.event.pull_request.base.ref }}'
-          tags: true
           github_token: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: Stop Gradle daemons
