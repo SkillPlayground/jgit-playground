@@ -31,6 +31,9 @@ jobs:
           restore-keys: |
             gradle-${{ runner.os }}-
 
+      - name: Show pusher
+        run: echo ${{ github.event.pusher.name }}
+
       - name: AddChangelogItem task
         run: |
           git switch -c ${{ github.event.pull_request.head.ref }}
