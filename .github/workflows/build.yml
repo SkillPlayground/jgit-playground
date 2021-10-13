@@ -34,7 +34,6 @@ jobs:
         run: |
           git config --local user.email "javier@segoviacordoba.com"
           git config --local user.name "Javier Segovia Córdoba"
-          git reset --soft HEAD~1
           ./gradlew addChangelogItem --renovateCommitTable
           git commit --amend --no-edit
 
