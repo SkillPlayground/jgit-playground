@@ -38,7 +38,7 @@ jobs:
           git config --global user.email "javier@segoviacordoba.com"
           git config --global user.name "Javier Segovia Córdoba"
           git diff
-          git commit --amend --no-edit
+          git commit -m "Fuck pull_request"
           git diff
           git push --set-upstream origin try-jgit --force
 
