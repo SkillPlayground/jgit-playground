@@ -1,9 +1,9 @@
 name: build-renovate
 
 on:
-  pull_request:
-#    branches:
-#      - 'renovate/**'
+  push:
+    branches:
+      - 'renovate/**'
     paths:
       - '**'
       - '!**/CHANGELOG.md'
@@ -11,9 +11,6 @@ on:
 jobs:
   add-updated-dependencies-to-changelog:
     runs-on: ubuntu-latest
-
-    needs:
-      - build-pull-request
 
     steps:
       - name: Checkout
